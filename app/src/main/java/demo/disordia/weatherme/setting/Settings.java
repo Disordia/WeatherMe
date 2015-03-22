@@ -43,7 +43,9 @@ public class Settings {
             editor.putString("country_code",currentCuntry.getCountryCode());
             editor.putInt("country_id",currentCuntry.getId());
             editor.putInt("city_id",currentCuntry.getCityId());
+
         }
+        editor.commit();
     }
 
     /**

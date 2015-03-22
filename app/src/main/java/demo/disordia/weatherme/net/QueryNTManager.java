@@ -36,7 +36,7 @@ new Thread(new Runnable() {
             }
             //如果存在侦听器
             if (callbackListener!=null){
-                Log.d("QueryNTManager","The response is :"+response);
+//                Log.d("QueryNTManager","The response is :"+response);
                 callbackListener.onFinish(response.toString());
             }
 

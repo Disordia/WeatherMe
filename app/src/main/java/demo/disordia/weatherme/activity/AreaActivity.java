@@ -1,7 +1,10 @@
 package demo.disordia.weatherme.activity;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -22,6 +25,7 @@ import demo.disordia.weatherme.model.Province;
 import demo.disordia.weatherme.net.HttpCallbackListener;
 import demo.disordia.weatherme.net.QueryNTManager;
 import demo.disordia.weatherme.optimization.ActivitiesCollector;
+import demo.disordia.weatherme.optimization.GlobalApplication;
 import demo.disordia.weatherme.util.DialogManager;
 import demo.disordia.weatherme.util.LogUtil;
 import demo.disordia.weatherme.util.Utility;
@@ -81,6 +85,7 @@ public class AreaActivity extends Activity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.areas);
+        //添加实例信息(优化用)
         ActivitiesCollector.addActivity(this);
         //获取各种控件:
         title_text= (TextView) findViewById(R.id.area_title);
@@ -102,6 +107,21 @@ public class AreaActivity extends Activity {
                     selectedCity=cities.get(position);
                     LogUtil.d("AreaActivity","go to that City");
                     initCountryData();
+                }else if (currentLevel==LEVEL_COUNTRY){
+                    String countryCode=countries.get(position).getCountryCode();
+                    //移除实例信息(优化)
+                    ActivitiesCollector.removeActivity(AreaActivity.this);
+
+                    //存储城市代码:
+                    SharedPreferences.Editor editor= PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
+                    editor.putString("country_code",countryCode);
+                    editor.commit();
+                    //结束存储
+                    //获取存储实例:
+                    Intent intent=new Intent(AreaActivity.this,WeatherActivity.class);
+                    intent.putExtra("country_code",countryCode);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -252,6 +272,7 @@ public class AreaActivity extends Activity {
 
     @Override
     protected void onDestroy() {
+        //移除实例信息(优化用)
         ActivitiesCollector.removeActivity(this);
         super.onDestroy();
     }

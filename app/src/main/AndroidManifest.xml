@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="demo.disordia.weatherme" >
+    package="demo.disordia.weatherme">
+
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
 
     <application
         android:name=".optimization.GlobalApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/iconwm"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.AreaActivity"
-            android:label="@string/app_name" >
+            android:name=".activity.IndexPage"
+            android:label="@string/app_name"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.AreaActivity"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".activity.WeatherActivity"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 
 
