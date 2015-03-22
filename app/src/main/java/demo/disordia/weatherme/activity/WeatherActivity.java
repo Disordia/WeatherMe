@@ -18,6 +18,7 @@ import demo.disordia.weatherme.net.HttpCallbackListener;
 import demo.disordia.weatherme.net.QueryNTManager;
 import demo.disordia.weatherme.optimization.ActivitiesCollector;
 import demo.disordia.weatherme.optimization.GlobalApplication;
+import demo.disordia.weatherme.service.AutoUpdateService;
 import demo.disordia.weatherme.util.LogUtil;
 import demo.disordia.weatherme.util.WeatherUtility;
 
@@ -28,7 +29,7 @@ import demo.disordia.weatherme.util.WeatherUtility;
  * create time: 2015-03-22.
  * e-mail:1482219895@qq.com
  * Package:demo.disordia.weatherme.activity
- * Descibe:
+ * Descibe:此活动用于显示天气信息:(在程序内)
  */
 public class WeatherActivity extends Activity {
 
@@ -81,7 +82,7 @@ public class WeatherActivity extends Activity {
         change_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(WeatherActivity.this, AreaActivity.class);
+                Intent intent = new Intent(WeatherActivity.this, AreaActivity.class);
                 startActivity(intent);
                 ActivitiesCollector.removeActivity(WeatherActivity.this);
                 finish();
@@ -133,6 +134,11 @@ public class WeatherActivity extends Activity {
                         String[] array = response.split("\\|");
                         if (array != null && array.length == 2) {
                             String weatherCode = array[1];
+                            //把城市代码存储
+                            SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
+                            editor.putString("weather_code",weatherCode);
+                            editor.commit();
+                            //存储完毕:
                             queryWeatherInfo(weatherCode);
                         }
                     }
@@ -187,6 +193,11 @@ public class WeatherActivity extends Activity {
         wendu.setText(wenduStr);
         //更新完毕，显示天气:
         weather_info_layout.setVisibility(View.VISIBLE);
+        /**
+         * 激活AutoUpdate服务:
+         */
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);
     }
 
 }
