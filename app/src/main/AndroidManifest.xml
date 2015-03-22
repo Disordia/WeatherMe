@@ -30,8 +30,11 @@
         <activity
             android:name=".activity.SettingsActivity"
             android:launchMode="singleTask"></activity>
+        <activity android:name=".activity.HelpActivity" android:launchMode="singleTask"></activity>
+        <activity android:name=".activity.AboutActivity" android:launchMode="singleTask"></activity>
         <service android:name=".service.AutoUpdateService"></service>
         <receiver android:name=".receiver.AutoUpdateReceiver"></receiver>
+        <activity android:name=".activity.HomePageActivity" android:launchMode="singleTask"></activity>
     </application>
 
 

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#484E61">
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/reset" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置"
+            android:textSize="24sp"
+            android:textColor="#fff"
+            android:id="@+id/textView"
+            android:layout_centerInParent="true" />
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ok" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_gravity="center_horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="基本设置"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#999"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  开机启动"
+                android:layout_weight="1"
+                android:textSize="23sp"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/start_with_boot" />
+        </LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#AAA"/>
+        <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  后台运行"
+            android:layout_weight="1"
+            android:textSize="23sp"/>
+
+        <CheckBox
+            android:id="@+id/run_in_bk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  自动刷新天气"
+                android:layout_weight="1"
+                android:textSize="23sp"/>
+
+            <CheckBox
+                android:id="@+id/refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="20dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="关于"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#999"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  使用帮助"
+            android:layout_weight="1"
+            android:textSize="23sp"/>
+
+        <Button
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/help"
+            android:id="@+id/btn_help" />
+
+    </LinearLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#AAA"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Who are we？"
+            android:layout_weight="1"
+            android:textSize="20sp"/>
+
+        <Button
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/about"
+            android:id="@+id/btn_about"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -17,17 +17,21 @@ import demo.disordia.weatherme.optimization.GlobalApplication;
  */
 public class Settings {
     //设置参数:
-    private boolean showWeather;
-    private boolean startWithBoot;
-    private Country currentCuntry;
-    private String style;
-    Settings settings;
+    private static boolean refresh;
+    private static boolean showWeather;
+    private static boolean startWithBoot;
+    private static boolean runInBk;
+    //是否为第一次设置:
+    private static boolean firstset=true;
+    private static String style;
+    private static Settings settings;
     //私有构造函数:
     private Settings(){
-        showWeather=true;
-        startWithBoot=false;
-        currentCuntry=null;
-        style="default";
+        if (firstset){
+            Reset();
+        }else{
+            loadSettings();
+        }
     }
 
     /**
@@ -37,14 +41,9 @@ public class Settings {
         SharedPreferences.Editor editor= GlobalApplication.getContext().getSharedPreferences("settings", Context.MODE_PRIVATE).edit();
         editor.putBoolean("showWeather",showWeather);
         editor.putBoolean(" startWithBoot",startWithBoot);
+        editor.putBoolean("runInBk",runInBk);
+        editor.putBoolean("refresh",refresh);
         editor.putString("style", style);
-        if (currentCuntry!=null) {
-            editor.putString("country_name", currentCuntry.getCountryName());
-            editor.putString("country_code",currentCuntry.getCountryCode());
-            editor.putInt("country_id",currentCuntry.getId());
-            editor.putInt("city_id",currentCuntry.getCityId());
-
-        }
         editor.commit();
     }
 
@@ -55,53 +54,56 @@ public void loadSettings(){
 SharedPreferences preferences=GlobalApplication.getContext().getSharedPreferences("settings",Context.MODE_PRIVATE);
     this.showWeather=preferences.getBoolean("showWeather",false);
     this.startWithBoot=preferences.getBoolean("startWithBoot",false);
+    this.refresh=preferences.getBoolean("refresh",false);
+    this.runInBk=preferences.getBoolean("runInBk",false);
     this.style=preferences.getString("style","");
-    //将选择的城市读入:
-    this.currentCuntry.setCountryCode(preferences.getString("country_code",""));
-    this.currentCuntry.setCountryName(preferences.getString("country_name",""));
-    this.currentCuntry.setId(preferences.getInt("country_id",0));
-    this.currentCuntry.setCityId(preferences.getInt("city_id",0));
 }
 
-    public Country getCurrentCuntry() {
-        return currentCuntry;
+    public  void setShowWeather(boolean showWeather) {
+        Settings.showWeather = showWeather;
     }
 
-    public void setCurrentCuntry(Country currentCuntry) {
-        this.currentCuntry = currentCuntry;
-    }
-
-    public void setShowWeather(boolean showWeather) {
-        this.showWeather = showWeather;
+    public  void setRunInBk(boolean runInBk) {
+        Settings.runInBk = runInBk;
     }
 
     public void setStartWithBoot(boolean startWithBoot) {
-        this.startWithBoot = startWithBoot;
+        Settings.startWithBoot = startWithBoot;
+    }
+
+    public void setRefresh(boolean refresh) {
+        Settings.refresh = refresh;
+    }
+
+    public static boolean isRefresh() {
+        return refresh;
+    }
+    public static boolean isRunInBk() {
+        return runInBk;
     }
 
     public void setStyle(String style) {
         this.style = style;
     }
 
-    public Settings getInstance() {
+    public static Settings getInstance() {
         if (settings == null) {
             settings = new Settings();
         }
         return settings;
     }
-    //
-    public  void initSetting()
-    {
 
-    }
 
     //还原参数：
     public void Reset()
     {
         showWeather=true;
         startWithBoot=false;
-        currentCuntry=null;
+        refresh=true;
+        runInBk=true;
         style="default";
+        firstset=false;
+        saveSettings();
     }
 
     public String getStyle() {
@@ -119,4 +121,6 @@ SharedPreferences preferences=GlobalApplication.getContext().getSharedPreference
     public boolean isStartWithBoot() {
         return startWithBoot;
     }
+
+
 }

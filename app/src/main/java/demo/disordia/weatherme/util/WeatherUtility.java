@@ -55,7 +55,7 @@ public class WeatherUtility {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
         editor.putBoolean("city_selected", true);
         editor.putString("city_name", city_name);
-
+//注意这边没有city code！！
         editor.putString("wendu", wendu);
         editor.putString("fengli", fengli);
         editor.putString("date",simpleDateFormat.format(new Date()));
@@ -77,7 +77,6 @@ public class WeatherUtility {
      * @param response
      */
     public static void handleWeatherResponse(String response) {
-
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser xmlPullParser = factory.newPullParser();

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bk_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/weather_bk1"
-    android:id="@+id/bk_layout"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -11,6 +11,13 @@
         android:layout_height="50dp"
         android:background="#484E61">
 
+        <Button
+            android:id="@+id/btn_home"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/home" />
         <TextView
             android:id="@+id/city_name"
             android:layout_width="wrap_content"
@@ -18,6 +25,15 @@
             android:layout_centerInParent="true"
             android:textColor="#fff"
             android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btn_fresh"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/fresh" />
 
     </RelativeLayout>
 
@@ -30,12 +46,12 @@
             android:id="@+id/updatetime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="26dp"
             android:layout_marginTop="30dp"
             android:text="updatetime"
+            android:textColor="#000"
             android:textSize="18sp" />
 
         <LinearLayout
@@ -47,8 +63,8 @@
             android:layout_margin="10dp"
             android:layout_marginEnd="10dp"
             android:gravity="right"
-            android:textColor="#fff"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:textColor="#fff">
 
             <TextView
                 android:id="@+id/date"
@@ -64,52 +80,52 @@
 
             <TextView
                 android:id="@+id/weather_now"
-                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/updatetime"
                 android:text="This is tianqi"
+                android:textColor="#fff"
                 android:textSize="40sp" />
 
             <TextView
                 android:id="@+id/wendu"
-                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="This is wendu"
+                android:textColor="#fff"
                 android:textSize="20sp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp" />
+
             <TextView
                 android:id="@+id/fengxiang"
-                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="this is fengxiang"
+                android:textColor="#fff"
                 android:textSize="30sp" />
 
             <TextView
                 android:id="@+id/fengli"
-                android:textColor="#fff"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:text="this is fengli"
+
+                android:textColor="#fff"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <Button
-            android:background="#00000000"
+            android:id="@+id/set_country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="更换城市>"
-            android:id="@+id/set_country"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"/>
-
-
+            android:layout_marginRight="10dp"
+            android:background="#00000000"
+            android:text="更换城市>" />
     </RelativeLayout>
 </LinearLayout>

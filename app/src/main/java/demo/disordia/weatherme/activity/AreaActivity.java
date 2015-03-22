@@ -112,11 +112,11 @@ public class AreaActivity extends Activity {
                     //移除实例信息(优化)
                     ActivitiesCollector.removeActivity(AreaActivity.this);
 
-                    //存储城市代码:
-                    SharedPreferences.Editor editor= PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
-                    editor.putString("country_code",countryCode);
-                    editor.commit();
-                    //结束存储
+//                    //存储城市代码:
+//                    SharedPreferences.Editor editor= PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
+//                    editor.putString("country_code",countryCode);
+//                    editor.commit();
+//                    //结束存储
                     //获取存储实例:
                     Intent intent=new Intent(AreaActivity.this,WeatherActivity.class);
                     intent.putExtra("country_code",countryCode);
@@ -183,7 +183,7 @@ public class AreaActivity extends Activity {
             //提示改变；
             areaAdapter.notifyDataSetChanged();
             area_list.setSelection(0);
-            title_text.setText("中国");
+            title_text.setText("请选择省份");
             currentLevel=LEVEL_PROVINCE;
         }else {
             //从网络获取:
@@ -266,6 +266,7 @@ public class AreaActivity extends Activity {
             initProvinceData();
         }else {
             ActivitiesCollector.removeActivity(this);
+            Intent intent=new Intent(AreaActivity.this,WeatherActivity.class);
             finish();
         }
     }

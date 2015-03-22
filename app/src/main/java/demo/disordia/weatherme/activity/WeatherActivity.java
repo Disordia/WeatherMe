@@ -33,10 +33,12 @@ import demo.disordia.weatherme.util.WeatherUtility;
  */
 public class WeatherActivity extends Activity {
 
-
+    private String countryCode;
+    private String currentCountry;
     //存放天气状况:
     private String weatherStr;
     private Button change_city;
+    private Button btnfresh, btnhome;
     //各控件:
     private TextView
             date,
@@ -67,6 +69,8 @@ public class WeatherActivity extends Activity {
         weather_now = (TextView) findViewById(R.id.weather_now);
         city_name = (TextView) findViewById(R.id.city_name);
         change_city = (Button) findViewById(R.id.set_country);
+        btnfresh = (Button) findViewById(R.id.btn_fresh);
+        btnhome = (Button) findViewById(R.id.btn_home);
         //设置不透明度
         bk_layout = findViewById(R.id.bk_layout);
         bk_layout.getBackground().setAlpha(200);//0~255
@@ -75,10 +79,10 @@ public class WeatherActivity extends Activity {
         weather_info_layout.setVisibility(View.INVISIBLE);
 
         //获取城市信息:
-
-        String countryCode = getIntent().getStringExtra("country_code");
+        countryCode = getIntent().getStringExtra("country_code");
         LogUtil.d("WeatherActivity", "CountryCode is" + countryCode);
-//设置按钮逻辑:
+        currentCountry= PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).getString("country_code", "");
+        //设置按钮逻辑:
         change_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +92,31 @@ public class WeatherActivity extends Activity {
                 finish();
             }
         });
-        if (!TextUtils.isEmpty(countryCode)) {
+        btnfresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //刷新显示以及获取
+                updatetime.setText("同步中,请稍候~~");
+                queryWeatherCode(countryCode);
+            }
+        });
+        btnhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(WeatherActivity.this,HomePageActivity.class);
+                startActivity(intent);
+//                ActivitiesCollector.removeActivity(WeatherActivity.this);
+                //finish();
+            }
+        });
+        //设置按钮逻辑完毕~~
+
+        if (!TextUtils.isEmpty(countryCode) && (!currentCountry.equals(countryCode))) {
+            //存储本地实例
+            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
+            editor.putString("country_code", countryCode);
+            editor.commit();
+
             //开始查询天气:
             updatetime.setText("同步中,请稍候~~");
             queryWeatherCode(countryCode);
@@ -121,11 +149,11 @@ public class WeatherActivity extends Activity {
     /**
      * 此函数用于向服务器发送请求:
      *
-     * @param adress
+     * @param address
      * @param type
      */
-    private void queryFromServer(final String adress, final String type) {
-        QueryNTManager.sendHttpRequest(adress, new HttpCallbackListener() {
+    private void queryFromServer(final String address, final String type) {
+        QueryNTManager.sendHttpRequest(address, new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {
                 //获取城市编号:
@@ -135,8 +163,8 @@ public class WeatherActivity extends Activity {
                         if (array != null && array.length == 2) {
                             String weatherCode = array[1];
                             //把城市代码存储
-                            SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
-                            editor.putString("weather_code",weatherCode);
+                            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
+                            editor.putString("weather_code", weatherCode);
                             editor.commit();
                             //存储完毕:
                             queryWeatherInfo(weatherCode);

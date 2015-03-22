@@ -53,14 +53,10 @@ public class IndexPage extends Activity {
                 }
                 //添加实例(优化用)
                 ActivitiesCollector.addActivity(IndexPage.this);
-
             }
         };
         timer.schedule(tast, 3000);
-
-
 //        LogUtil.d("Index Page","Finish onCreate");
-
     }
 
     @Override

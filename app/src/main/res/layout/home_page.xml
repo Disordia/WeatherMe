@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/home_page"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/cross"
+            android:id="@+id/cross"
+            android:layout_marginTop="128dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="128dp" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/to_help"
+            android:background="@drawable/tohelp"
+            android:layout_marginTop="27dp"
+            android:layout_marginEnd="60dp"
+            android:layout_below="@+id/to_set"
+            android:layout_alignEnd="@+id/cross" />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/to_set"
+            android:background="@drawable/set"
+            android:layout_marginEnd="67dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+</LinearLayout>
