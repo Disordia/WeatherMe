@@ -9,10 +9,12 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 
+import demo.disordia.weatherme.console.ShowWeatherService;
 import demo.disordia.weatherme.net.HttpCallbackListener;
 import demo.disordia.weatherme.net.QueryNTManager;
 import demo.disordia.weatherme.optimization.GlobalApplication;
 import demo.disordia.weatherme.receiver.AutoUpdateReceiver;
+import demo.disordia.weatherme.util.LogUtil;
 import demo.disordia.weatherme.util.WeatherUtility;
 
 /**
@@ -39,8 +41,15 @@ public class AutoUpdateService extends Service {
             }
         }).start();
 
+        LogUtil.d("AutoUpdateService","Update Service");
+
+
+        //开始显示天气:
+        Intent intentw=new Intent(GlobalApplication.getContext(), ShowWeatherService.class);
+        GlobalApplication.getContext().startService(intentw);
+
         AlarmManager manager= (AlarmManager) getSystemService(ALARM_SERVICE);
-        int anHour=8*60*60*1000;
+        int anHour=1*60*60*1000;
         long triggerTime= SystemClock.elapsedRealtime()+anHour;
         Intent i=new Intent(this, AutoUpdateReceiver.class);
         PendingIntent pendingIntent=PendingIntent.getBroadcast(this,0,i,0);

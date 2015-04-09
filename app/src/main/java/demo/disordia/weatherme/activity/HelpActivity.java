@@ -2,6 +2,7 @@ package demo.disordia.weatherme.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import demo.disordia.weatherme.R;
 import demo.disordia.weatherme.optimization.ActivitiesCollector;
@@ -21,6 +22,8 @@ public class HelpActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.help);
         ActivitiesCollector.addActivity(this);
+        ((TextView)findViewById(R.id.tv_title)).setText("遇到问题了?");
+
     }
 
     @Override

@@ -2,14 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"></View>
 <TextView
     android:id="@+id/area_name"
     android:textSize="24sp"
+    android:textColor="@color/grey"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"></View>
     <ImageView
-        android:background="#999"
+        android:background="@color/divider"
         android:layout_width="match_parent"
         android:scaleType="fitXY"
-        android:layout_height="3dp" />
+        android:layout_height="1dp" />
 </LinearLayout>

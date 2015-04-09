@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <demo.disordia.weatherme.ui.TitleBackLayout style="@style/title_style"></demo.disordia.weatherme.ui.TitleBackLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This is the about page.\n Add more functions in the future"
+        android:textColor="@color/grey"
+        android:textSize="24sp" />
 </LinearLayout>

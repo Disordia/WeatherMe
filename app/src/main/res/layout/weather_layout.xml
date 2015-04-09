@@ -3,57 +3,27 @@
     android:id="@+id/bk_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/weather_bk1"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#484E61">
-
-        <Button
-            android:id="@+id/btn_home"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/home" />
-        <TextView
-            android:id="@+id/city_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="#fff"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/btn_fresh"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/fresh" />
-
-    </RelativeLayout>
+<demo.disordia.weatherme.ui.TitleMainLayout
+    style="@style/title_style"
+></demo.disordia.weatherme.ui.TitleMainLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-
         <TextView
             android:id="@+id/updatetime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="26dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
             android:text="updatetime"
             android:textColor="#000"
             android:textSize="18sp" />
-
         <LinearLayout
             android:id="@+id/weather_info_layout"
             android:layout_width="wrap_content"
@@ -64,14 +34,14 @@
             android:layout_marginEnd="10dp"
             android:gravity="right"
             android:orientation="vertical"
-            android:textColor="#fff">
+            android:textColor="#000">
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="this is date "
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="18sp" />
 
             <TextView
@@ -84,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/updatetime"
                 android:text="This is tianqi"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="40sp" />
 
             <TextView
@@ -92,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="This is wendu"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="20sp" />
 
             <TextView
@@ -104,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="this is fengxiang"
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="30sp" />
 
             <TextView
@@ -113,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:text="this is fengli"
 
-                android:textColor="#fff"
+                android:textColor="#000"
                 android:textSize="20sp" />
         </LinearLayout>
 

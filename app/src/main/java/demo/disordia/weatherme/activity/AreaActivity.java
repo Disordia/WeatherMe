@@ -46,7 +46,6 @@ public class AreaActivity extends Activity {
     private static int LEVEL_PROVINCE=0;
     private static int LEVEL_CITY=1;
     private static int LEVEL_COUNTRY=2;
-
     /**
      * 目前的分层:
      */
@@ -77,7 +76,7 @@ public class AreaActivity extends Activity {
      */
     private Province selectedProvince;
     private City selectedCity;
-    private Country selectedCountry;
+//private Country selectedCountry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +87,19 @@ public class AreaActivity extends Activity {
         //添加实例信息(优化用)
         ActivitiesCollector.addActivity(this);
         //获取各种控件:
-        title_text= (TextView) findViewById(R.id.area_title);
+        title_text= (TextView) findViewById(R.id.tv_title);
         area_list= (ListView) findViewById(R.id.area_list);
         areaAdapter=new AreaAdapter(this,R.layout.area_list,areaList);
         area_list.setAdapter(areaAdapter);
         weatherMeDb=WeatherMeDb.getInstance(this);
+
+
+
+//        if (getIntent().getBooleanExtra("first_boot",true)){
+//            findViewById(R.id.btn_back).setVisibility(View.INVISIBLE);
+//        }else {
+//            findViewById(R.id.btn_back).setVisibility(View.VISIBLE);
+//        }
         //设置点击事件:
         area_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -111,12 +118,6 @@ public class AreaActivity extends Activity {
                     String countryCode=countries.get(position).getCountryCode();
                     //移除实例信息(优化)
                     ActivitiesCollector.removeActivity(AreaActivity.this);
-
-//                    //存储城市代码:
-//                    SharedPreferences.Editor editor= PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
-//                    editor.putString("country_code",countryCode);
-//                    editor.commit();
-//                    //结束存储
                     //获取存储实例:
                     Intent intent=new Intent(AreaActivity.this,WeatherActivity.class);
                     intent.putExtra("country_code",countryCode);
@@ -267,6 +268,7 @@ public class AreaActivity extends Activity {
         }else {
             ActivitiesCollector.removeActivity(this);
             Intent intent=new Intent(AreaActivity.this,WeatherActivity.class);
+            startActivity(intent);
             finish();
         }
     }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:myns="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <demo.disordia.weatherme.ui.ArcMenu
+        android:id="@+id/arcmenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        myns:position="center"
+        myns:radius="120dp">
+        <RelativeLayout
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/composer_button">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/composer_icn_plus"
+                />
+        </RelativeLayout>
+        <ImageView
+            style="@style/item_style"
+            android:id="@+id/cross"
+            android:src="@drawable/composer_thought"/>
+        <ImageView
+            style="@style/item_style"
+            android:id="@+id/to_set"
+            android:src="@drawable/composer_sleep"/>
+        <ImageView
+            style="@style/item_style"
+            android:id="@+id/to_help"
+            android:src="@drawable/composer_place"/>
+
+    </demo.disordia.weatherme.ui.ArcMenu>
+
+</RelativeLayout>

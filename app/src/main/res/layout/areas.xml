@@ -4,23 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#484E61">
-
-        <TextView
-            android:id="@+id/area_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="#fff"
-            android:textSize="24sp" />
-    </RelativeLayout>
+<demo.disordia.weatherme.ui.TitleLayout
+    android:layout_width="match_parent"
+    android:layout_height="50dp"></demo.disordia.weatherme.ui.TitleLayout>
 
     <ListView
         android:id="@+id/area_list"
         android:layout_width="match_parent"
         android:divider="#0000"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_height="match_parent"></ListView>
 </LinearLayout>

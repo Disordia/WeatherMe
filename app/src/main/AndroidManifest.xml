@@ -3,7 +3,7 @@
     package="demo.disordia.weatherme">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"></uses-permission>
 
     <application
         android:name=".optimization.GlobalApplication"
@@ -31,10 +31,16 @@
             android:name=".activity.SettingsActivity"
             android:launchMode="singleTask"></activity>
         <activity android:name=".activity.HelpActivity" android:launchMode="singleTask"></activity>
+        <activity android:name=".activity.HomePageActivity" android:launchMode="singleTask"></activity>
         <activity android:name=".activity.AboutActivity" android:launchMode="singleTask"></activity>
         <service android:name=".service.AutoUpdateService"></service>
+        <service android:name=".console.ShowRainService"></service>
+        <service android:name=".console.ShowSmokeService"></service>
+        <service android:name=".console.ShowSnowService"></service>
+        <service android:name=".console.ShowSunService"></service>
+        <service android:name=".console.ShowWeatherService"></service>
         <receiver android:name=".receiver.AutoUpdateReceiver"></receiver>
-        <activity android:name=".activity.HomePageActivity" android:launchMode="singleTask"></activity>
+
     </application>
 
 

@@ -73,7 +73,7 @@ public class WeatherActivity extends Activity {
         btnhome = (Button) findViewById(R.id.btn_home);
         //设置不透明度
         bk_layout = findViewById(R.id.bk_layout);
-        bk_layout.getBackground().setAlpha(200);//0~255
+//        bk_layout.getBackground().setAlpha(255);//0~255
         //隐藏天气显示:
         weather_info_layout = findViewById(R.id.weather_info_layout);
         weather_info_layout.setVisibility(View.INVISIBLE);
@@ -95,9 +95,20 @@ public class WeatherActivity extends Activity {
         btnfresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //如果选择了城市
+                if (!TextUtils.isEmpty(currentCountry)){
                 //刷新显示以及获取
-                updatetime.setText("同步中,请稍候~~");
-                queryWeatherCode(countryCode);
+                    if(!TextUtils.isEmpty(countryCode)){
+                        updatetime.setText("同步中,请稍候~~");
+                        queryWeatherCode(countryCode);
+                    }else {
+                        updatetime.setText("同步中,请稍候~~");
+                        queryWeatherCode(currentCountry);
+                    }
+                }else {
+                   //如果用户没有选择城市:
+                updatetime.setText("都说了要选择城市啦~~");
+                }
             }
         });
         btnhome.setOnClickListener(new View.OnClickListener() {
@@ -117,10 +128,15 @@ public class WeatherActivity extends Activity {
             editor.putString("country_code", countryCode);
             editor.commit();
 
+
+            weather_info_layout.setVisibility(View.INVISIBLE);
             //开始查询天气:
             updatetime.setText("同步中,请稍候~~");
             queryWeatherCode(countryCode);
-        } else {
+        }else if (TextUtils.isEmpty(currentCountry)){
+            updatetime.setText("您还没有选择任何城市哟~~");
+        }
+        else {
             //直接显示本地天气:
             showWeather();
         }
@@ -200,6 +216,9 @@ public class WeatherActivity extends Activity {
      * 此函数用于显示天气信息:
      */
     private void showWeather() {
+        LogUtil.d("WeatherActivity","Start to show weather");
+
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext());
         //显示天气:(调试)
         LogUtil.d("Weather Activity", "The day weather is：" + preferences.getString("day_weather", ""));
