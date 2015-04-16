@@ -16,5 +16,5 @@ public class Snow {
     public int maxY;
     public int middle;
     public float size;
-
+    public int type;
 }

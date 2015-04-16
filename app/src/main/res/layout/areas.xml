@@ -5,13 +5,13 @@
     android:orientation="vertical">
 
 <demo.disordia.weatherme.ui.TitleLayout
-    android:layout_width="match_parent"
-    android:layout_height="50dp"></demo.disordia.weatherme.ui.TitleLayout>
+    style="@style/title_style"></demo.disordia.weatherme.ui.TitleLayout>
 
     <ListView
         android:id="@+id/area_list"
         android:layout_width="match_parent"
         android:divider="#0000"
+        android:layout_marginTop="0dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_height="match_parent"></ListView>

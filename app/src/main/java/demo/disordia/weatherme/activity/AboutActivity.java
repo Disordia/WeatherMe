@@ -22,7 +22,7 @@ public class AboutActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.about);
         ActivitiesCollector.addActivity(this);
-        ((TextView)findViewById(R.id.tv_title)).setText("关于我们");
+        ((TextView)findViewById(R.id.tv_title)).setText("关于WeatherME");
     }
 
     @Override

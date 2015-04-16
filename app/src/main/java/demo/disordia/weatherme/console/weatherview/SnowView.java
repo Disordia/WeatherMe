@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 import demo.disordia.weatherme.R;
+import demo.disordia.weatherme.setting.Settings;
 
 /**
  * Project: CanvasPrac
@@ -27,18 +28,32 @@ import demo.disordia.weatherme.R;
 public class SnowView extends View {
 
     List<Snow> snows=new ArrayList<Snow>();
+    private int level;
 
-    public SnowView(Context context, AttributeSet attrs) {
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public SnowView(Context context, AttributeSet attrs,int level) {
         super(context, attrs);
+        setLevel(level);
         paint = new Paint();
-        paint.setAntiAlias(true);
         paint.setDither(true);
+        snow= BitmapFactory.decodeResource(getResources(), R.drawable.xuehua2);
+        snow2= BitmapFactory.decodeResource(getResources(), R.drawable.snow1);
+        snow3= BitmapFactory.decodeResource(getResources(), R.drawable.snow3);
+        snow4= BitmapFactory.decodeResource(getResources(), R.drawable.snow4);
+        Settings settings=Settings.getInstance();
+        if (settings.isAntiAli()){
+            paint.setAntiAlias(true);
+        }
+
         InitSnow();
     }
 
     private void InitSnow() {
         random=new Random();
-        for (int i=0;i<8;i++){
+        for (int i=0;i<level*4+4;i++){
             Snow isnow=new Snow();
             isnow.x=random.nextInt(500)-50;
             isnow.y=random.nextInt(50)+10;
@@ -46,18 +61,19 @@ public class SnowView extends View {
             isnow.size=random.nextFloat()/2+0.2f;
             isnow.maxY=random.nextInt(300)+100+isnow.y;
             isnow.middle=(isnow.maxY+isnow.y)/2;
+            isnow.type=random.nextInt(4);
             snows.add(isnow);
         }
 
     }
 
     private Random random;
-    private Bitmap snow;
+    private Bitmap snow,snow2,snow3,snow4;
     private Paint paint;
     private Matrix matrix;
     @Override
     protected void onDraw(Canvas canvas) {
-        snow= BitmapFactory.decodeResource(getResources(), R.drawable.xuehua2);
+
         matrix=new Matrix();
 
         for (Snow isnow:snows){
@@ -74,9 +90,14 @@ public class SnowView extends View {
             }
 
             paint.setAlpha(isnow.alpha);
-            isnow.y+=3;
+            isnow.y+=level+1;
             matrix.setScale(isnow.size,isnow.size,isnow.x,isnow.y);
-            canvas.drawBitmap(snow,matrix,paint);
+            switch (isnow.type) {
+                case 0:  canvas.drawBitmap(snow, matrix, paint);break;
+                case 1:  canvas.drawBitmap(snow2, matrix, paint);break;
+                case 2:  canvas.drawBitmap(snow3, matrix, paint);break;
+                case 3:  canvas.drawBitmap(snow4, matrix, paint);break;
+            }
             if (isnow.y>isnow.maxY){
                 isnow.x=random.nextInt(500)-50;
                 isnow.y=random.nextInt(50)+10;
@@ -84,7 +105,7 @@ public class SnowView extends View {
                 isnow.size=random.nextFloat()/2+0.2f;
                 isnow.maxY=random.nextInt(300)+100+isnow.y;
                 isnow.middle=(isnow.maxY+isnow.y)/2;
-
+                isnow.type=random.nextInt(4);
             }
         }
     }//end onDraw

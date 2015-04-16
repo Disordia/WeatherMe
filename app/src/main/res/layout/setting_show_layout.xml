@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <demo.disordia.weatherme.ui.TitleBackLayout style="@style/title_style"></demo.disordia.weatherme.ui.TitleBackLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="@color/grey"
+                android:textSize="@dimen/list_main_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  桌面天气透明度"
+                android:id="@+id/textView" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#999" />
+
+            <TextView
+                android:text="    透明度为0时自动关闭显示:"
+                android:id="@+id/alpha_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:max="254"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarAlpha" />
+
+            <TextView
+                android:text="  图像设置"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/list_main_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#999"
+                android:id="@+id/imageView" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:text="   抗锯齿(建议开启)"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/list_text_size"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:id="@+id/anti_ali"
+                    android:layout_width="wrap_content"
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+
+                    android:text="   只在桌面显示"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/list_text_size"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <CheckBox
+                    android:id="@+id/show_only_desktop"
+                    android:layout_width="wrap_content"
+                    android:paddingRight="5dp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <TextView
+                android:text="   \n  Ps: 某些设置可能需要重新启动本程序"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="重置选项"
+            android:background="@drawable/btn_wm"
+            android:textSize="@dimen/list_text_size"
+            android:id="@+id/btn_show_reset"
+            android:layout_width="0dp"
+            android:textColor="@color/grey"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:background="@drawable/btn_wm"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/list_text_size"
+            android:text="确认"
+            android:id="@+id/btn_show_ok"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

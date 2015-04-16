@@ -7,7 +7,7 @@
         android:layout_height="10dp"></View>
 <TextView
     android:id="@+id/area_name"
-    android:textSize="24sp"
+    android:textSize="@dimen/list_main_size"
     android:textColor="@color/grey"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
@@ -19,4 +19,5 @@
         android:layout_width="match_parent"
         android:scaleType="fitXY"
         android:layout_height="1dp" />
+
 </LinearLayout>

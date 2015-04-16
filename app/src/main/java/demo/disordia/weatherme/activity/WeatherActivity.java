@@ -11,6 +11,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageSwitcher;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import demo.disordia.weatherme.R;
@@ -19,6 +21,8 @@ import demo.disordia.weatherme.net.QueryNTManager;
 import demo.disordia.weatherme.optimization.ActivitiesCollector;
 import demo.disordia.weatherme.optimization.GlobalApplication;
 import demo.disordia.weatherme.service.AutoUpdateService;
+import demo.disordia.weatherme.ui.BackGroundManager;
+import demo.disordia.weatherme.ui.SlidingView;
 import demo.disordia.weatherme.util.LogUtil;
 import demo.disordia.weatherme.util.WeatherUtility;
 
@@ -49,10 +53,12 @@ public class WeatherActivity extends Activity {
             updatetime,
             city_name;
     //设置背景用：
-    View bk_layout;
+    ImageView bk_layout;
     //设置天气是否显示用:
     View weather_info_layout;
 
+    //侧滑菜单:
+    SlidingView slidingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +77,10 @@ public class WeatherActivity extends Activity {
         change_city = (Button) findViewById(R.id.set_country);
         btnfresh = (Button) findViewById(R.id.btn_fresh);
         btnhome = (Button) findViewById(R.id.btn_home);
+        slidingView= (SlidingView) findViewById(R.id.sliding_view);
         //设置不透明度
-        bk_layout = findViewById(R.id.bk_layout);
+        bk_layout = (ImageView) findViewById(R.id.bk_layout);
+
 //        bk_layout.getBackground().setAlpha(255);//0~255
         //隐藏天气显示:
         weather_info_layout = findViewById(R.id.weather_info_layout);
@@ -111,24 +119,28 @@ public class WeatherActivity extends Activity {
                 }
             }
         });
+        //还是不显示那个捉急的界面了吧
         btnhome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(WeatherActivity.this,HomePageActivity.class);
-                startActivity(intent);
+                //原来是显示关于界面，现在改成了侧滑菜单啦~~
+                     slidingView.toggle();
+//                Intent intent=new Intent(WeatherActivity.this,AboutActivity.class);
+//                startActivity(intent);
 //                ActivitiesCollector.removeActivity(WeatherActivity.this);
                 //finish();
             }
         });
         //设置按钮逻辑完毕~~
 
+        //如果就是不是原来的城市就开始重新查询
         if (!TextUtils.isEmpty(countryCode) && (!currentCountry.equals(countryCode))) {
             //存储本地实例
             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
             editor.putString("country_code", countryCode);
             editor.commit();
 
-
+            //让天气部分看不见
             weather_info_layout.setVisibility(View.INVISIBLE);
             //开始查询天气:
             updatetime.setText("同步中,请稍候~~");
@@ -240,6 +252,10 @@ public class WeatherActivity extends Activity {
         wendu.setText(wenduStr);
         //更新完毕，显示天气:
         weather_info_layout.setVisibility(View.VISIBLE);
+        //显示我们的天气背景:
+        BackGroundManager backGroundManager=new BackGroundManager();
+        bk_layout.setImageBitmap(backGroundManager.getBackGround());
+
         /**
          * 激活AutoUpdate服务:
          */
@@ -247,4 +263,11 @@ public class WeatherActivity extends Activity {
         startService(intent);
     }
 
+    /**
+     * 屏蔽back键:
+     */
+    @Override
+    public void onBackPressed() {
+
+    }
 }

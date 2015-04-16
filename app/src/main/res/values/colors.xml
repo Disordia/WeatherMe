@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="orange">#ff8800</color>
-    <color name="grey">#000</color>
+    <color name="grey">#ff404143</color>
     <color name="divider">#ff7a7a7a</color>
+    <color name="white">#fff</color>
 </resources>

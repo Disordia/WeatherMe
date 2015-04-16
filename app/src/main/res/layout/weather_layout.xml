@@ -1,101 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/bk_layout"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@drawable/xingkong"
+    tools:context=".MainActivity">
 
-<demo.disordia.weatherme.ui.TitleMainLayout
-    style="@style/title_style"
-></demo.disordia.weatherme.ui.TitleMainLayout>
+    <demo.disordia.weatherme.ui.SlidingView xmlns:disordia="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sliding_view"
+        android:layout_width="wrap_content"
+        disordia:rightPadding="80dp"
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/updatetime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:text="updatetime"
-            android:textColor="#000"
-            android:textSize="18sp" />
         <LinearLayout
-            android:id="@+id/weather_info_layout"
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_margin="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="right"
-            android:orientation="vertical"
-            android:textColor="#000">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/date"
+            <include layout="@layout/menu_layout"></include>
+
+            <!--存放真正的布局-->
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="this is date "
-                android:textColor="#000"
-                android:textSize="18sp" />
+                android:layout_height="match_parent">
+                <!--content-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+                <RelativeLayout
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
+                    xmlns:android="http://schemas.android.com/apk/res/android">
 
-            <TextView
-                android:id="@+id/weather_now"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/updatetime"
-                android:text="This is tianqi"
-                android:textColor="#000"
-                android:textSize="40sp" />
+                    <ImageView
+                        android:layout_marginTop="38dp"
+                        android:id="@+id/bk_layout"
+                        android:scaleType="centerCrop"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
 
-            <TextView
-                android:id="@+id/wendu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This is wendu"
-                android:textColor="#000"
-                android:textSize="20sp" />
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="match_parent"
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/fengxiang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="this is fengxiang"
-                android:textColor="#000"
-                android:textSize="30sp" />
+                        <demo.disordia.weatherme.ui.TitleMainLayout style="@style/title_style"></demo.disordia.weatherme.ui.TitleMainLayout>
 
-            <TextView
-                android:id="@+id/fengli"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="this is fengli"
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1">
 
-                android:textColor="#000"
-                android:textSize="20sp" />
+                            <TextView
+                                android:id="@+id/updatetime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="15dp"
+                                android:text="updatetime"
+                                android:textColor="#000"
+                                android:textSize="18sp" />
+
+                            <LinearLayout
+                                android:id="@+id/weather_info_layout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:gravity="right"
+                                android:orientation="vertical"
+                                android:textColor="#000">
+
+                                <TextView
+                                    android:id="@+id/date"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="this is date "
+                                    android:textColor="#000"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="10dp" />
+
+                                <TextView
+                                    android:id="@+id/weather_now"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/updatetime"
+                                    android:text="This is tianqi"
+                                    android:textColor="#000"
+                                    android:textSize="40sp" />
+
+                                <TextView
+                                    android:id="@+id/wendu"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="This is wendu"
+                                    android:textColor="#000"
+                                    android:textSize="20sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="30dp" />
+
+                                <TextView
+                                    android:id="@+id/fengxiang"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="this is fengxiang"
+                                    android:textColor="#000"
+                                    android:textSize="30sp" />
+
+                                <TextView
+                                    android:id="@+id/fengli"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="this is fengli"
+
+                                    android:textColor="#000"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+
+                            <Button
+                                android:id="@+id/set_country"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="#00000000"
+                                android:text="更换城市>" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </RelativeLayout>
+                <!--end intent-->
+            </LinearLayout>
         </LinearLayout>
+    </demo.disordia.weatherme.ui.SlidingView>
 
-        <Button
-            android:id="@+id/set_country"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginRight="10dp"
-            android:background="#00000000"
-            android:text="更换城市>" />
-    </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

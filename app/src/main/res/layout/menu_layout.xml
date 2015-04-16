@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="15dp"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
+<LinearLayout
+    android:id="@+id/setting"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        style="@style/ico_sytle"
+        android:background="@drawable/setico"/>
+    <TextView
+        android:textColor="@color/white"
+        android:textSize="@dimen/menu_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  设置" />
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/help"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            style="@style/ico_sytle"
+            android:background="@drawable/item2"/>
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="@dimen/menu_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  帮助"
+             />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/about"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            style="@style/ico_sytle"
+            android:background="@drawable/item3"/>
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="@dimen/menu_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  关于"
+           />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/home"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            style="@style/ico_sytle"
+            android:background="@drawable/aboutico"/>
+        <TextView
+            android:textColor="@color/white"
+            android:textSize="@dimen/menu_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  返回"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -4,11 +4,33 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
     <demo.disordia.weatherme.ui.TitleBackLayout
         style="@style/title_style"></demo.disordia.weatherme.ui.TitleBackLayout>
-
-    <TextView
-        android:textColor="@color/grey"
-        android:textSize="24sp"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This is the help page.\n Add more functions in the future" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"></View>
+            <TextView
+                android:textSize="@dimen/hello_word_size"
+                android:gravity="center"
+                android:text="@string/help_pre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"></View>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#999"/>
+
+            </LinearLayout>
+    </ScrollView>
 </LinearLayout>

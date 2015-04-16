@@ -11,6 +11,7 @@ import android.view.View;
 import java.util.Random;
 
 import demo.disordia.weatherme.R;
+import demo.disordia.weatherme.setting.Settings;
 import demo.disordia.weatherme.util.LogUtil;
 
 /**
@@ -24,13 +25,25 @@ import demo.disordia.weatherme.util.LogUtil;
  */
 public class SunView extends View {
 
-    public SunView(Context context, AttributeSet attrs) {
+    private int level;
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public SunView(Context context, AttributeSet attrs,int levelx) {
         super(context, attrs);
+        setLevel(levelx);
+        LogUtil.d("SunView","The level is:"+levelx);
         InitSun();
         paint = new Paint();
-        paint.setAntiAlias(true);
         random = new Random();
-        alpha = random.nextInt(20) + 215;
+        alpha = random.nextInt(20) + 175+level*10;
+        Settings settings=Settings.getInstance();
+        if (settings.isAntiAli()){
+            paint.setAntiAlias(true);
+        }
+
     }
 
 
@@ -53,7 +66,7 @@ public class SunView extends View {
         alpha += state;
         if (cycle % 3 == 0) {
             if (random.nextBoolean()) {
-                LogUtil.d("SunView", "The boolean is:" + random.nextBoolean());
+//                LogUtil.d("SunView", "The boolean is:" + random.nextBoolean());
                 state = -3;
                 cycle=1;
             } else {
@@ -61,31 +74,47 @@ public class SunView extends View {
                 cycle=1;
             }
         }
-        if (alpha > 250) {
-            alpha = 250;
+        if (alpha > 170+level*10) {
+            alpha = 170+level*10;
         }
-        if (alpha <185) {
-            alpha = 185;
+        if (alpha <105+level*10) {
+            alpha = 105+level*10;
         }
-        paint.setAlpha(alpha);
+
+        paint.setAlpha(alpha+level*10);
 
 
-        canvas.drawBitmap(sunbm,0,0,paint);
-        if (alpha>230){
-            paint.setAlpha(alpha-40);
-            canvas.drawBitmap(yunguang,0,0,paint);
-        }else if (alpha>225){
-            paint.setAlpha(alpha-45);
-            canvas.drawBitmap(yunguang,0,0,paint);
-        }else if (alpha>215){
-            paint.setAlpha(alpha-55);
-            canvas.drawBitmap(yunguang,0,0,paint);
-        }else if (alpha>205){
-            paint.setAlpha(alpha-70);
-            canvas.drawBitmap(yunguang,0,0,paint);
-        }else if (alpha>195){
-            paint.setAlpha(alpha-100);
-            canvas.drawBitmap(yunguang,0,0,paint);
+        if (level==1){
+            canvas.drawBitmap(sunbm, 0, 0, paint);
+            if (alpha > 190 + level * 10) {
+                paint.setAlpha(alpha - 40 + level * 10);
+            } else if (alpha > 185 + level * 10) {
+                paint.setAlpha(alpha - 45 + level * 10);
+            } else if (alpha > 175 + level * 10) {
+                paint.setAlpha(alpha - 55 + level * 10);
+            } else if (alpha > 165 + level * 10) {
+                paint.setAlpha(alpha - 70 + level * 10);
+            } else if (alpha > 155 + level * 10) {
+                paint.setAlpha(alpha - 100 + level * 10);
+            }
+        }else {
+            canvas.drawBitmap(sunbm, 0, 0, paint);
+            if (alpha > 190 + level * 10) {
+                paint.setAlpha(alpha - 40 + level * 10);
+                canvas.drawBitmap(yunguang, 0, 0, paint);
+            } else if (alpha > 185 + level * 10) {
+                paint.setAlpha(alpha - 45 + level * 10);
+                canvas.drawBitmap(yunguang, 0, 0, paint);
+            } else if (alpha > 175 + level * 10) {
+                paint.setAlpha(alpha - 55 + level * 10);
+                canvas.drawBitmap(yunguang, 0, 0, paint);
+            } else if (alpha > 165 + level * 10) {
+                paint.setAlpha(alpha - 70 + level * 10);
+                canvas.drawBitmap(yunguang, 0, 0, paint);
+            } else if (alpha > 155 + level * 10) {
+                paint.setAlpha(alpha - 100 + level * 10);
+                canvas.drawBitmap(yunguang, 0, 0, paint);
+            }
         }
     }//end onDraw
 

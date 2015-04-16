@@ -10,11 +10,16 @@ package demo.disordia.weatherme.console.weatherview;
  * Descibe:
  */
 public class Smoke {
+
     public int x;
     public int y;
+
     public int alpha;
+
     public int speed;
     public int maxX;
     public int middle;
+
+    public int type;
     public float size;
 }

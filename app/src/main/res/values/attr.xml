@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="position" >
+    <attr name="position">
         <enum name="left_top" value="0"></enum>
         <enum name="left_bottom" value="1"></enum>
         <enum name="right_top" value="2"></enum>
         <enum name="right_bottom" value="3"></enum>
         <enum name="center" value="4"></enum>
     </attr>
-<attr name="radius" format="dimension"></attr>
-
-<!--自定义的卫星菜单-->
+    <attr name="radius" format="dimension"></attr>
+    <attr name="rightPadding" format="dimension"></attr>
+    <!--自定义的卫星菜单-->
     <declare-styleable name="ArcMenu">
         <attr name="position"></attr>
         <attr name="radius"></attr>
     </declare-styleable>
 
+    <!--滚动条-->
+    <declare-styleable name="SlidingView">
+        <attr name="rightPadding"></attr>
+    </declare-styleable>
 
 </resources>

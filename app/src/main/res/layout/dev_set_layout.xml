@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <demo.disordia.weatherme.ui.TitleBackLayout style="@style/title_style"></demo.disordia.weatherme.ui.TitleBackLayout>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:textColor="@color/grey"
+                android:textSize="@dimen/list_main_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  桌面天气显示层级"
+                android:id="@+id/textView" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#999" />
+            <Spinner
+                android:entries="@array/layer"
+                android:prompt="@string/spinner_word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="重置选项"
+            android:background="@drawable/btn_wm"
+            android:textSize="@dimen/list_text_size"
+            android:id="@+id/btn_show_reset"
+            android:layout_width="0dp"
+            android:textColor="@color/grey"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:background="@drawable/btn_wm"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/list_text_size"
+            android:text="确认"
+            android:id="@+id/btn_show_ok"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

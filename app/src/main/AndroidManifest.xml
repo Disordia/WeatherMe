@@ -4,11 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <uses-permission android:name="android.permission.GET_TASKS"></uses-permission>
 
     <application
         android:name=".optimization.GlobalApplication"
         android:allowBackup="true"
-        android:icon="@drawable/iconwm"
+        android:icon="@drawable/weather_mel"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
@@ -30,17 +32,38 @@
         <activity
             android:name=".activity.SettingsActivity"
             android:launchMode="singleTask"></activity>
-        <activity android:name=".activity.HelpActivity" android:launchMode="singleTask"></activity>
-        <activity android:name=".activity.HomePageActivity" android:launchMode="singleTask"></activity>
-        <activity android:name=".activity.AboutActivity" android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".activity.HelpActivity"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".activity.HomePageActivity"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".activity.AboutActivity"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".setting.SettingShowActivity"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".setting.SettingDevActivity"
+            android:launchMode="singleTask"></activity>
+
+
         <service android:name=".service.AutoUpdateService"></service>
         <service android:name=".console.ShowRainService"></service>
         <service android:name=".console.ShowSmokeService"></service>
         <service android:name=".console.ShowSnowService"></service>
         <service android:name=".console.ShowSunService"></service>
         <service android:name=".console.ShowWeatherService"></service>
-        <receiver android:name=".receiver.AutoUpdateReceiver"></receiver>
 
+
+        <receiver android:name=".receiver.AutoUpdateReceiver"></receiver>
+        <receiver android:name=".receiver.BootCompleteRecevicer">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 

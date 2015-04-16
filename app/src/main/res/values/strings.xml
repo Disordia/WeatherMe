@@ -3,5 +3,17 @@
 
     <string name="app_name">WeatherME</string>
     <string name="action_settings">Settings</string>
+    <string name="spinner_word">请选择显示的层级</string>
+    <string name="description">WeatherME源于四川大学萌芽项目,它是完全开源的.\n
+        WeatherME同时是一款实时天气显示软件,此软件旨在将天气更加灵活地呈现在用户之前.\n
+        此程序的天气资料源自:\nhttp://wthrcdn.etouch.cn/\n
+        此程序的城市信息源自:\nhttp://www.weather.com.cn/
+    </string>
+    <string name="studio_description">萌萌哒芽工作室是一个四川大学萌芽计划的团队,它由三个人组成.\n
+    小组成员的开发经验都不是很多,如果你对这个项目有什么意见和建议,欢迎将您的宝贵意见与建议传达给我们,萌萌哒芽工作室将会尽最大努力改进.
+    </string>
+    <string name="pre_word">感谢您使用WeatherME\n我们希望您有一个美好的用户体验</string>
 
+
+    <string name="help_pre">我们搜集了一些使用问题\n或许它能够帮助你</string>
 </resources>

@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import demo.disordia.weatherme.setting.Settings;
+
 /**
  * Created by Disordia profaneden on 2015-04-09.
  */
@@ -18,58 +20,67 @@ public class RainView extends View {
 
     List<Rain> rains = new ArrayList<Rain>();
     Paint paint, paint2, paint3;
+    private int level=1;
 
+    public void setLevel(int level) {
+        this.level = level;
+    }
 
-    public RainView(Context context, AttributeSet attrs) {
+    public RainView(Context context, AttributeSet attrs,int level) {
         super(context, attrs);
+        setLevel(level);
         /**
-         * ³õÊ¼»¯ËùÓĞµÄ»­±Ê
+         *  init all pens
          */
-        paint = new Paint(); //ÉèÖÃÒ»¸ö±ÊË¢´óĞ¡ÊÇ3µÄ»ÆÉ«µÄ»­±Ê
+        paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setStrokeJoin(Paint.Join.ROUND);
         paint.setStrokeCap(Paint.Cap.ROUND);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setAntiAlias(true);
+
         paint.setDither(true);
         paint.setStrokeWidth(1.5f);
-        paint2 = new Paint(); //ÉèÖÃÒ»¸ö±ÊË¢´óĞ¡ÊÇ3µÄ»ÆÉ«µÄ»­±Ê
+        paint2 = new Paint();
         paint2.setColor(Color.WHITE);
         paint2.setStrokeJoin(Paint.Join.ROUND);
         paint2.setStrokeCap(Paint.Cap.ROUND);
         paint2.setStyle(Paint.Style.STROKE);
-        paint2.setAntiAlias(true);
+
         paint2.setDither(true);
         paint2.setStrokeWidth(1f);
-        paint3 = new Paint(); //ÉèÖÃÒ»¸ö±ÊË¢´óĞ¡ÊÇ3µÄ»ÆÉ«µÄ»­±Ê
+        paint3 = new Paint();
         paint3.setColor(Color.WHITE);
         paint3.setStrokeJoin(Paint.Join.ROUND);
         paint3.setStrokeCap(Paint.Cap.ROUND);
         paint3.setStyle(Paint.Style.STROKE);
-        paint3.setAntiAlias(true);
+
         paint3.setDither(true);
         paint3.setStrokeWidth(0.5f);
+        /* æ˜¯å¦æŠ—é”¯é½¿: */
+        Settings settings=Settings.getInstance();
+        if (settings.isAntiAli()){
+            paint.setAntiAlias(true);
+            paint2.setAntiAlias(true);
+            paint3.setAntiAlias(true);
+        }
 
-        //³õÊ¼»¯ÓêÈİÆ÷:
+
         InitRain();
     }
 
     private Random random;
 
-    /**
-     * ¶ÔÓêÈİÆ÷½øĞĞ³õÊ¼»¯:
-     */
     public void InitRain() {
         random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < level*2+4; i++) {
             Rain rain = new Rain();
-            rain.x = random.nextInt(300);
-            rain.y = random.nextInt(300);
+            rain.x = random.nextInt(200);
+            rain.y = random.nextInt(240);
             rain.radius = random.nextInt(60) + 5;
-            rain.maxradius=random.nextInt(65)+36;
-            if(rain.x+rain.y>350){
-                rain.x=300-rain.x;
-                rain.y=300-rain.y;
+            rain.maxradius=random.nextInt(60)+36-level*5;
+            if(rain.x+rain.y>460){
+                rain.x=200-rain.x;
+                rain.y=240-rain.y;
             }
             rains.add(rain);
         }
@@ -80,11 +91,9 @@ public class RainView extends View {
      */
     @Override
     protected void onDraw(final Canvas canvas) {
-/**
- * ±éÀúÃ¿¸öÓêµãÀ´»æÖÆ:
- */
+
         for (Rain rain : rains) {
-            rain.radius += 2;
+            rain.radius +=level/2+2;
             if (rain.radius < 15) {
                 canvas.drawCircle(rain.x, rain.y, rain.radius, paint);
             } else if (rain.radius < 25) {
@@ -101,19 +110,15 @@ public class RainView extends View {
                 canvas.drawCircle(rain.x, rain.y, rain.radius - 25, paint3);
             }//end if
 
-/**
- * ÕâÀï²âÊÔÓêÊÇ·ñÒªÖØĞÂ³õÊ¼»¯
- */
             if (rain.radius > rain.maxradius) {
-                rain.x = random.nextInt(300);
-                rain.y = random.nextInt(300);
-                rain.radius = random.nextInt(10);
-                rain.maxradius = random.nextInt(35) + 46;
-                if (rain.x + rain.y > 350) {
-                    rain.x = 300 - rain.x;
-                    rain.y = 300 - rain.y;
+                rain.x = random.nextInt(200);
+                rain.y = random.nextInt(240);
+                rain.radius = random.nextInt(8);
+                rain.maxradius=random.nextInt(25)+56-level*5;
+                if(rain.x+rain.y>460){
+                    rain.x=200-rain.x;
+                    rain.y=240-rain.y;
                 }
-
             }//end if
         }//end for
     }//end onDraw

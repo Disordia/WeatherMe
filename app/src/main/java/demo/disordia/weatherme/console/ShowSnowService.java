@@ -1,7 +1,9 @@
 package demo.disordia.weatherme.console;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
@@ -13,6 +15,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import demo.disordia.weatherme.console.weatherview.SnowView;
+import demo.disordia.weatherme.optimization.GlobalApplication;
+import demo.disordia.weatherme.setting.Settings;
+import demo.disordia.weatherme.util.HomeJudger;
+import demo.disordia.weatherme.util.WindowManagerUtil;
 
 /**
  * Project: CanvasPrac
@@ -27,6 +33,8 @@ public class ShowSnowService extends Service {
     private WindowManager windowManager;
     private WindowManager.LayoutParams layoutParams;
     private SnowView snowView;
+    private boolean showOnlyDesktop;
+    private boolean showWeather=true;
 
     Timer timer=new Timer();
     TimerTask timerTask=new TimerTask() {
@@ -41,9 +49,19 @@ public class ShowSnowService extends Service {
                 @Override
                 public void handleMessage(Message msg) {
 
-                    //要做的事情
-                    snowView.invalidate();
-                    super.handleMessage(msg);
+                    if (showWeather) {
+                        //要做的事情
+                        if (HomeJudger.isHome() || showOnlyDesktop == false) {
+                            AddView();
+                            snowView.invalidate();
+                            super.handleMessage(msg);
+                        } else {
+                            RemoveView();
+                            super.handleMessage(msg);
+                        }
+                    }else {
+                        RemoveView();
+                    }
                 }
             };
 
@@ -56,34 +74,56 @@ public class ShowSnowService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        SharedPreferences sharedPreferences = GlobalApplication.getContext().getSharedPreferences("weatherLevel", Context.MODE_PRIVATE);
+        level = sharedPreferences.getInt("snow", 0);
         ShowOnScreen();
-
-        snowView=new SnowView(this,null);
-
-        windowManager.addView(snowView,layoutParams);
-        timer.schedule(timerTask,80,80);
+        snowView=new SnowView(this,null,level);
+        AddView();
+        timer.schedule(timerTask, 60, 80);
     }
 
     @Override
     public void onDestroy() {
-       windowManager.removeView(snowView);
+        RemoveView();
+        showWeather=false;
         super.onDestroy();
     }
 
     public void ShowOnScreen() {
+
+        Settings settings=Settings.getInstance();
+        showOnlyDesktop=settings.isShowOnlyDesktop();
         windowManager = (WindowManager) getSystemService(getApplicationContext().WINDOW_SERVICE);
-        layoutParams = new WindowManager.LayoutParams();
-        layoutParams.gravity = Gravity.LEFT | Gravity.LEFT;
-        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.type = WindowManager.LayoutParams.FIRST_SYSTEM_WINDOW + 2;
-        layoutParams.format = PixelFormat.RGBA_8888;
-//        layoutParams.alpha=10;
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE |
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|
-                WindowManager.LayoutParams. FLAG_LAYOUT_IN_SCREEN ;
+        layoutParams =  WindowManagerUtil.getLayoutParams();
 
     }
 
+
+private int level;
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        showWeather=true;
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+
+
+    private boolean isAdd = false;
+
+    private void AddView() {
+        if (!isAdd) {
+            windowManager.addView(snowView, layoutParams);
+            isAdd = true;
+        }
+    }
+
+    private void RemoveView() {
+        if (isAdd) {
+            if (snowView != null) {
+                windowManager.removeView(snowView);
+            }
+            isAdd = false;
+        }
+    }
 
 }

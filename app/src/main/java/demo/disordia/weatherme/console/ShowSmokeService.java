@@ -1,7 +1,9 @@
 package demo.disordia.weatherme.console;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.os.Handler;
 import android.os.IBinder;
@@ -13,7 +15,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import demo.disordia.weatherme.console.weatherview.SmokeView;
+import demo.disordia.weatherme.optimization.GlobalApplication;
+import demo.disordia.weatherme.setting.Settings;
+import demo.disordia.weatherme.util.HomeJudger;
 import demo.disordia.weatherme.util.LogUtil;
+import demo.disordia.weatherme.util.WindowManagerUtil;
 
 /**
  * Project: CanvasPrac
@@ -29,57 +35,95 @@ public class ShowSmokeService extends Service {
     WindowManager windowManager;
     WindowManager.LayoutParams layoutParams;
     SmokeView smokeView;
+    private boolean showOnlyDesktop;
+    private boolean showWeather = true;
 
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
 
-    Timer timer=new Timer();
-    TimerTask timerTask=new TimerTask() {
+    Timer timer = new Timer();
+    TimerTask timerTask = new TimerTask() {
         @Override
         public void run() {
-            Message message=handler.obtainMessage();
+            Message message = handler.obtainMessage();
             handler.sendMessage(message);
         }
     };
 
-            Handler handler=new Handler(){
-                @Override
-                public void handleMessage(Message msg) {
+    Handler handler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            if (showWeather) {
+                if (HomeJudger.isHome() || showOnlyDesktop == false) {
+                    AddView();
                     smokeView.invalidate();
                     super.handleMessage(msg);
+                } else {
+                    RemoveView();
+                    super.handleMessage(msg);
                 }
-            };
+            } else {
+                RemoveView();
+            }//end if
+        }
+    };
 
     @Override
     public void onCreate() {
         super.onCreate();
         ShowOnScreen();
-        LogUtil.d("SmokeService","onCreate");
-        smokeView=new SmokeView(this,null);
-        windowManager.addView(smokeView,layoutParams);
-        timer.schedule(timerTask,80,80);
+        LogUtil.d("SmokeService", "onCreate");
+        SharedPreferences sharedPreferences = GlobalApplication.getContext().getSharedPreferences("weatherLevel", Context.MODE_PRIVATE);
+        level = sharedPreferences.getInt("smoke", 0);
+        LogUtil.d("ShowSmokeService", "The current level before add is: " + level);
+        smokeView = new SmokeView(this, null, level);
+        AddView();
+        timer.schedule(timerTask, 80, 80);
     }
 
 
     public void ShowOnScreen() {
+        Settings settings = Settings.getInstance();
+        showOnlyDesktop = settings.isShowOnlyDesktop();
         windowManager = (WindowManager) getSystemService(getApplicationContext().WINDOW_SERVICE);
-        layoutParams = new WindowManager.LayoutParams();
-        layoutParams.gravity = Gravity.LEFT | Gravity.LEFT;
-        layoutParams.height = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
-        layoutParams.type = WindowManager.LayoutParams.FIRST_SYSTEM_WINDOW + 2;
-        layoutParams.format = PixelFormat.RGBA_8888;
-//        layoutParams.alpha=10;
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE |
-                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|
-                WindowManager.LayoutParams. FLAG_LAYOUT_IN_SCREEN ;
+        layoutParams =  WindowManagerUtil.getLayoutParams();
     }
 
     @Override
     public void onDestroy() {
-        windowManager.removeView(smokeView);
+        RemoveView();
+        showWeather = false;
         super.onDestroy();
     }
+
+    private int level;
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        showWeather=true;
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+
+    private boolean isAdd = false;
+
+    private void AddView() {
+        if (!isAdd) {
+            windowManager.addView(smokeView, layoutParams);
+            isAdd = true;
+        }
+    }
+
+    private void RemoveView() {
+        if (isAdd) {
+            if (smokeView != null) {
+                windowManager.removeView(smokeView);
+            }
+            isAdd = false;
+        }
+    }
+
 }

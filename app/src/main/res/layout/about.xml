@@ -6,10 +6,91 @@
 
     <demo.disordia.weatherme.ui.TitleBackLayout style="@style/title_style"></demo.disordia.weatherme.ui.TitleBackLayout>
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="This is the about page.\n Add more functions in the future"
-        android:textColor="@color/grey"
-        android:textSize="24sp" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"></View>
+            <TextView
+                android:textSize="@dimen/hello_word_size"
+                android:gravity="center"
+                android:text="@string/pre_word"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"></View>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="程序简介"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/list_main_size" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#999"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"></View>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/weather_mel"/>
+            <TextView
+                android:textSize="@dimen/hello_word_size"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/description"/>
+            </LinearLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"></View>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="开发组简介"
+                android:textColor="@color/grey"
+                android:textSize="@dimen/list_main_size" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="#999"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"></View>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/mmdy"/>
+                <TextView
+                    android:textSize="@dimen/hello_word_size"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="@string/studio_description"/>
+            </LinearLayout>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"></View>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
