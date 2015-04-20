@@ -120,7 +120,12 @@ public class AreaActivity extends Activity {
                     ActivitiesCollector.removeActivity(AreaActivity.this);
                     //获取存储实例:
                     Intent intent=new Intent(AreaActivity.this,WeatherActivity.class);
-                    intent.putExtra("country_code",countryCode);
+                    intent.putExtra("country_code", countryCode);
+                    //此处是为了解决开始的bug
+                    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).edit();
+                    editor.putString("firstCountryCode", countryCode);
+                    editor.commit();
+                    //开始程序
                     startActivity(intent);
                     finish();
                 }
@@ -198,14 +203,14 @@ public class AreaActivity extends Activity {
      * @param type
      */
     private void queryFromServer(final String code,final String type){
+        DialogManager.showProgressDialog(this);
         final String adress;
         if(!TextUtils.isEmpty(code)){
             adress="http://www.weather.com.cn/data/list3/city"+code+".xml";
         }else {
             adress="http://www.weather.com.cn/data/list3/city.xml";
         }
-        LogUtil.d("AreaActivity","The adress is:"+adress);
-        DialogManager.showProgressDialog(this);
+        LogUtil.d("AreaActivity", "The adress is:" + adress);
         QueryNTManager.sendHttpRequest(adress,new HttpCallbackListener() {
             @Override
             public void onFinish(String response) {

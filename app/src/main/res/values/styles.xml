@@ -19,8 +19,8 @@
 
     <style name="ico_sytle">
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_width">45dp</item>
-        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_width">35dp</item>
+        <item name="android:layout_height">35dp</item>
     </style>
 
     <style name="text_style">

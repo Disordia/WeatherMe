@@ -6,7 +6,7 @@
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingBottom="15dp"
-    android:background="@drawable/popup"
+    android:background="@drawable/popupx"
     android:layout_height="wrap_content">
 
     <TextView

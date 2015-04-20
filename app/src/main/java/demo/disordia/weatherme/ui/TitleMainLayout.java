@@ -29,13 +29,27 @@ import demo.disordia.weatherme.optimization.GlobalApplication;
  * Descibe:
  */
 public class TitleMainLayout extends LinearLayout {
-    private static Button titleOverflow;
+    private static Button titleOverflow,share;
     private static PopupWindow popupWindow;
 
     public TitleMainLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.layout_title_main, this);
         titleOverflow= (Button) findViewById(R.id.btn_overflowx);
+        share= (Button) findViewById(R.id.btn_share);
+        //添加分享功能:
+        share.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_SEND);
+                intent.setType("text/*");
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Share");
+                intent.putExtra(Intent.EXTRA_TEXT, "我现在正在用一款名叫WeatherME的天气软件,用起来效果还不错哦~~");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(Intent.createChooser(intent, ((Activity)getContext()).getTitle()));
+            }
+        });
+        //为按钮增加侦听器:
         titleOverflow.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,6 +1,7 @@
 package demo.disordia.weatherme.setting;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -9,6 +10,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import demo.disordia.weatherme.R;
+import demo.disordia.weatherme.console.ShowWeatherService;
 import demo.disordia.weatherme.optimization.ActivitiesCollector;
 import demo.disordia.weatherme.util.LogUtil;
 
@@ -76,6 +78,8 @@ public class SettingShowActivity extends Activity {
                 settings.setAlpha(alphaShow.getProgress());
                 settings.setShowOnlyDesktop(showOnlyDesktop.isChecked());
                 settings.saveShowSettings();
+                    Intent intent=new Intent(SettingShowActivity.this, ShowWeatherService.class);
+                    startService(intent);
                 finish();
             }
         });

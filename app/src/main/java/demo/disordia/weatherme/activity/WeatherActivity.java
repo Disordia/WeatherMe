@@ -77,7 +77,7 @@ public class WeatherActivity extends Activity {
         change_city = (Button) findViewById(R.id.set_country);
         btnfresh = (Button) findViewById(R.id.btn_fresh);
         btnhome = (Button) findViewById(R.id.btn_home);
-        slidingView= (SlidingView) findViewById(R.id.sliding_view);
+        slidingView = (SlidingView) findViewById(R.id.sliding_view);
         //设置不透明度
         bk_layout = (ImageView) findViewById(R.id.bk_layout);
 
@@ -89,7 +89,7 @@ public class WeatherActivity extends Activity {
         //获取城市信息:
         countryCode = getIntent().getStringExtra("country_code");
         LogUtil.d("WeatherActivity", "CountryCode is" + countryCode);
-        currentCountry= PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).getString("country_code", "");
+        currentCountry = PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).getString("country_code", "");
         //设置按钮逻辑:
         change_city.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,18 +104,26 @@ public class WeatherActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //如果选择了城市
-                if (!TextUtils.isEmpty(currentCountry)){
-                //刷新显示以及获取
-                    if(!TextUtils.isEmpty(countryCode)){
+                if (!TextUtils.isEmpty(currentCountry)) {
+                    //刷新显示以及获取
+                    if (!TextUtils.isEmpty(countryCode)) {
                         updatetime.setText("同步中,请稍候~~");
                         queryWeatherCode(countryCode);
-                    }else {
+                    } else {
                         updatetime.setText("同步中,请稍候~~");
                         queryWeatherCode(currentCountry);
                     }
-                }else {
-                   //如果用户没有选择城市:
-                updatetime.setText("都说了要选择城市啦~~");
+                } else {
+                    //避免bug001
+                    String firstSet=PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext()).getString("firstCountryCode", "");
+                    if (!TextUtils.isEmpty(firstSet)) {
+                        currentCountry=firstSet;
+                        updatetime.setText("同步中,请稍候~");
+                        queryWeatherCode(firstSet);
+                    } else {
+                        //如果用户没有选择城市:
+                        updatetime.setText("都说了要选择城市啦~~");
+                    }
                 }
             }
         });
@@ -124,7 +132,7 @@ public class WeatherActivity extends Activity {
             @Override
             public void onClick(View v) {
                 //原来是显示关于界面，现在改成了侧滑菜单啦~~
-                     slidingView.toggle();
+                slidingView.toggle();
 //                Intent intent=new Intent(WeatherActivity.this,AboutActivity.class);
 //                startActivity(intent);
 //                ActivitiesCollector.removeActivity(WeatherActivity.this);
@@ -145,10 +153,9 @@ public class WeatherActivity extends Activity {
             //开始查询天气:
             updatetime.setText("同步中,请稍候~~");
             queryWeatherCode(countryCode);
-        }else if (TextUtils.isEmpty(currentCountry)){
+        } else if (TextUtils.isEmpty(currentCountry)) {
             updatetime.setText("您还没有选择任何城市哟~~");
-        }
-        else {
+        } else {
             //直接显示本地天气:
             showWeather();
         }
@@ -228,7 +235,7 @@ public class WeatherActivity extends Activity {
      * 此函数用于显示天气信息:
      */
     private void showWeather() {
-        LogUtil.d("WeatherActivity","Start to show weather");
+        LogUtil.d("WeatherActivity", "Start to show weather");
 
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext());
@@ -253,7 +260,7 @@ public class WeatherActivity extends Activity {
         //更新完毕，显示天气:
         weather_info_layout.setVisibility(View.VISIBLE);
         //显示我们的天气背景:
-        BackGroundManager backGroundManager=new BackGroundManager();
+        BackGroundManager backGroundManager = new BackGroundManager();
         bk_layout.setImageBitmap(backGroundManager.getBackGround());
 
         /**

@@ -26,17 +26,25 @@
             android:layout_centerInParent="true"
             android:textSize="@dimen/title_text_size" />
         <Button
-            android:id="@+id/btn_fresh"
-            style="@style/btn_sytle"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/ic_action_refresh"/>
-        <Button
             android:id="@+id/btn_overflowx"
             style="@style/btn_sytle"
-            android:background="@drawable/ic_action_overflow"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_action_overflow"/>
+        <Button
+            android:id="@+id/btn_fresh"
+            style="@style/btn_sytle"
+            android:background="@drawable/ic_action_refresh"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/btn_fresh"
-            android:layout_marginEnd="16dp" />
+            android:layout_toStartOf="@+id/btn_overflowx"
+            android:layout_marginEnd="5dp" />
+
+        <Button
+            style="@style/btn_sytle"
+            android:id="@+id/btn_share"
+            android:background="@drawable/ic_action_share"
+            android:layout_marginEnd="7dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btn_fresh" />
     </RelativeLayout>
 </LinearLayout>

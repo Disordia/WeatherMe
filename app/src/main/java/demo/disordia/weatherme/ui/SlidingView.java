@@ -84,39 +84,55 @@ public class SlidingView extends HorizontalScrollView {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
+    //侧边菜单的按钮
+private View item1;
+private View item2;
+private View item3;
+private View item4;
+
+    /**
+     * 此函数用于设置菜单按钮的点击事件
+     * @param view
+     */
     private void setMenuOnClick(View view){
-        view.findViewById(R.id.home).setOnClickListener(new OnClickListener() {
+
+        item1=view.findViewById(R.id.home);
+        item2=view.findViewById(R.id.help);
+        item3=view.findViewById(R.id.setting);
+        item4=view.findViewById(R.id.about);
+
+           item1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeMenu();
             }
         });
 
-        view.findViewById(R.id.help).setOnClickListener(new OnClickListener() {
+        item2.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), HelpActivity.class);
+                Intent intent = new Intent(getContext(), HelpActivity.class);
                 ((Activity) getContext()).startActivity(intent);
             }
         });
 
-        view.findViewById(R.id.setting).setOnClickListener(new OnClickListener() {
+        item3.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), SettingsActivity.class);
+                Intent intent = new Intent(getContext(), SettingsActivity.class);
                 ((Activity) getContext()).startActivity(intent);
             }
         });
 
-        view.findViewById(R.id.about).setOnClickListener(new OnClickListener() {
+        item4.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getContext(), AboutActivity.class);
+                Intent intent = new Intent(getContext(), AboutActivity.class);
                 ((Activity) getContext()).startActivity(intent);
             }
         });
 
-    }
+    }//end setMenuClick
 
 
     private boolean isOpen=false;
@@ -126,6 +142,10 @@ public class SlidingView extends HorizontalScrollView {
         super.onLayout(changed, l, t, r, b);
         if (changed){
             this.scrollTo(mMenuWidth,0);
+            item1.setClickable(false);
+            item2.setClickable(false);
+            item3.setClickable(false);
+            item4.setClickable(false);
             isOpen=true;
         }
     }//end function
@@ -138,9 +158,9 @@ public class SlidingView extends HorizontalScrollView {
             {
                 int scrollX=getScrollX();
                 if (scrollX>=mMenuWidth/2){
-                    this.smoothScrollTo(mMenuWidth, 0);
+                    closeMenu();
                 }else {
-                    this.smoothScrollTo(0,0);
+                    openMenu();
                 }
               return true;
             }
@@ -151,12 +171,30 @@ public class SlidingView extends HorizontalScrollView {
     public void openMenu(){
         this.smoothScrollTo(0,0);
         if (isOpen)return;
+        //设置菜单按钮可点击
+        item1.setClickable(true);
+        item1.setFocusable(true);
+        item2.setClickable(true);
+        item2.setFocusable(true);
+        item3.setClickable(true);
+        item3.setFocusable(true);
+        item4.setClickable(true);
+        item4.setFocusable(true);
+
         isOpen=true;
     }
 
     public void closeMenu(){
         this.smoothScrollTo(mMenuWidth,0);
         if (!isOpen)return;
+        item1.setClickable(false);
+        item1.setFocusable(false);
+        item2.setClickable(false);
+        item2.setFocusable(false);
+        item3.setClickable(false);
+        item3.setFocusable(false);
+        item4.setClickable(false);
+        item4.setFocusable(false);
         isOpen=false;
     }
     //切换菜单:
@@ -168,7 +206,7 @@ public class SlidingView extends HorizontalScrollView {
         else {
             closeMenu();
         }
-    }
+    }//end menu
 
 //滚动发生时调用
     @Override
@@ -192,5 +230,6 @@ public class SlidingView extends HorizontalScrollView {
         mMenu.setScaleY(leftScale);
         mMenu.setAlpha(leftAlpha);
         mMenu.setTranslationX(mMenuWidth*scale*0.7f);
-    }
+    }//end function
+
 }

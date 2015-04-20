@@ -51,6 +51,8 @@ public class SettingsActivity extends Activity implements View.OnClickListener{
         btn_back= (Button) findViewById(R.id.btn_back);
         btn_setweathershow= (Button) findViewById(R.id.btn_setweathershow);
         btn_setappwidget= (Button) findViewById(R.id.btn_setappwidget);
+        //先暂时除去这个功能
+        btn_setappwidget.setVisibility(View.GONE);
         btn_dev= (Button) findViewById(R.id.btn_dev);
         //载入按钮结束:
         //载入选择控件

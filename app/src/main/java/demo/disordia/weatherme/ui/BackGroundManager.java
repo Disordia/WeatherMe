@@ -20,6 +20,7 @@ import demo.disordia.weatherme.util.LogUtil;
  * Created by Disordia profaneden on 2015-04-10.
  */
 public class BackGroundManager {
+
     private static Bitmap bitmap;
     private String weather;
     private static BufferedInputStream bufferedInputStream;
@@ -49,18 +50,17 @@ public class BackGroundManager {
         //判断是否显示:
         Settings settings=Settings.getInstance();
         if (!settings.isShowBk()){
-            bitmap=BitmapFactory.decodeResource(GlobalApplication.getContext().getResources(), R.drawable.mosha);
-            return bitmap;
+            return null;
         }
 
         getTheWeather();
         try {
-            bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xuayu2.jpg"));
+            bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xingkong.jpeg"));
             //判断天气情况:
             //晴天:
             if (weather.equals("晴")) {
                 if (!isNight) {
-                    bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/qingtian.jpg"));
+                    bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/qingtian.jpeg"));
                 } else {
                     bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/qingye.jpg"));
                 }
@@ -78,7 +78,7 @@ public class BackGroundManager {
                 //是否为晚上:
                 if (!isNight) {
                     if (random.nextBoolean()) {
-                        bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayu.jpeg"));
+                        bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayuy.jpeg"));
                     }else {
                         bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayuy.jpeg"));
                     }
@@ -88,9 +88,9 @@ public class BackGroundManager {
             } else if (weather.equals("中雨")) {
                 //是否为晚上:
                 if (!isNight) {
-                    bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayu.jpeg"));
+                    bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayuy.jpeg"));
                 } else {
-                    bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayux.jpeg"));
+                    bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayuy.jpeg"));
                 }//结束对时间的判断:            } else if (weather.equals("暴雨")) {
 
             } else if (weather.equals("阵雨")) {
@@ -98,20 +98,21 @@ public class BackGroundManager {
                 if (!isNight) {
                     bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayuy.jpeg"));
                 } else {
-                    bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayux.jpeg"));
+                    bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/xiayuy.jpeg"));
                 }//结束对时间的判断:            } else if (weather.equals("雷阵雨")) {
             }
 
             //下面是对其他天气的判断:
 
             else if (weather.equals("雷电")) {
+                bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/shandian.jpg"));
             } else if (weather.equals("冰雹")) {
             } else if (weather.equals("轻雾")) {
-                bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/wu2.jpg"));
+                bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/wu.jpg"));
             } else if (weather.equals("雾")) {
                 bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/wu.jpg"));
             } else if (weather.equals("浓雾")) {
-                bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/wu2.jpg"));
+                bufferedInputStream = new BufferedInputStream(GlobalApplication.getContext().getAssets().open("weather/wu.jpg"));
             } else if (weather.equals("霾")) {
             } else if (weather.equals("雨夹雪")) {
             } else if (weather.equals("小雪")) {

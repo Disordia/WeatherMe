@@ -98,7 +98,7 @@ public class ShowWeatherService extends Service {
         startService(intent);
     }
 
-    public void showFrozen(int level){
+    public void showFrozen(int level) {
         SharedPreferences.Editor editor = GlobalApplication.getContext().getSharedPreferences("weatherLevel", Context.MODE_PRIVATE).edit();
         editor.putInt("frozen", level);
         editor.commit();
@@ -106,7 +106,6 @@ public class ShowWeatherService extends Service {
         weatherServices.add(intent);
         startService(intent);
     }
-
 
 
     private static final int StartID = 1;
@@ -133,9 +132,9 @@ public class ShowWeatherService extends Service {
  */
         // 3构建通知
         Notification.Builder builder = new Notification.Builder(this)
-        // API 11添加的方法
-        .setContentIntent(pendingIntent).setSmallIcon(R.drawable.notification)
-                // 设置状态栏的小标题
+                // API 11添加的方法
+                .setContentIntent(pendingIntent).setSmallIcon(R.drawable.notification)
+                        // 设置状态栏的小标题
                 .setLargeIcon(
                         BitmapFactory.decodeResource(getResources(),
                                 R.drawable.weather_mel))// 设置下拉列表里的图标
@@ -156,74 +155,72 @@ public class ShowWeatherService extends Service {
         LogUtil.d("ShowWeatherService", "now start to get the weather");
         //获取天气信息:
         getTheWeather();
-        //调试信息:
-        LogUtil.d("ShowWeatherService", "The weather is:" + weather);
-        LogUtil.d("ShowWeatherService", "The boolean is" + ("阴").equals(weather));
-
-        LogUtil.d("ShowWeatherService","开始判断天气情况");
-        LogUtil.d("ShowWeatherService","之前的天气是"+preweather);
-
-
-        LogUtil.d("ShowWeatherService","The two boolean are:"+!weather.equals(preweather)+weatherServices.isEmpty());
-
-        //如果之前的显示的天气和现在要显示的天气是不一样的
-        if ((!weather.equals(preweather)) || weatherServices.isEmpty()) {
-            //停止当前的天气:
+        //检测是否显示天气
+        Settings settings = Settings.getInstance();
+        if (settings.getAlpha() <= 0) {
             RemoveAllWeather();
-            LogUtil.d("ShowWeatherService", "进入内部判断");
-            //判断天气情况:
-            if (weather.equals("晴")) {
-                showSun(HIGH_LEVEL);
-            } else if (weather.equals("多云")) {
-                LogUtil.d("ShowWeatherService","显示多云天气");
-                showSun(LOW_LEVEL);
-                showSmoke(MIDDLE_LEVEL);
-            } else if (weather.equals("阴")) {
-                LogUtil.d("ShowWeatherService", "Start show Smoke");
-                showSmoke(HIGH_LEVEL);
-            } else if (weather.equals("小雨")) {
-                showRain(LOW_LEVEL);
-            } else if (weather.equals("中雨")) {
-                showRain(MIDDLE_LEVEL);
-            } else if (weather.equals("暴雨")) {
-                showRain(HIGH_LEVEL);
-            } else if (weather.equals("阵雨")) {
-                showRain(HIGH_LEVEL);
-            } else if (weather.equals("雷阵雨")) {
-                showRain(HIGH_LEVEL);
-            } else if (weather.equals("雷电")) {
-            } else if (weather.equals("冰雹")) {
-            } else if (weather.equals("轻雾")) {
-                showSmoke(MIDDLE_LEVEL);
-            } else if (weather.equals("雾")) {
-                showSmoke(HIGH_LEVEL);
-            } else if (weather.equals("浓雾")) {
-                showSmoke(MAX_LEVEL);
-            } else if (weather.equals("霾")) {
-                showSmoke(MAX_LEVEL);
-            } else if (weather.equals("雨夹雪")) {
-                showSnow(LOW_LEVEL);
-                showRain(MIDDLE_LEVEL);
-            } else if (weather.equals("小雪")) {
-                showSnow(LOW_LEVEL);
-            } else if (weather.equals("中雪")) {
-                showSnow(MIDDLE_LEVEL);
-            } else if (weather.equals("大雪")) {
-                showSnow(HIGH_LEVEL);
-            } else if (weather.equals("暴雪")) {
-                showSnow(MAX_LEVEL);
-            } else if (weather.equals("冻雨")) {
-            } else if (weather.equals("霜")) {
-                showFrozen(MIDDLE_LEVEL);
-            } else if (weather.equals("霜冻")) {
-                showFrozen(HIGH_LEVEL);
-            } else if (weather.equals("台风")) {
-            } else if (weather.equals("浮尘")) {
-            } else if (weather.equals("扬沙")) {
-            } else if (weather.equals("沙尘暴")) {
+        } else {
+            //调试信息:
+
+            //如果之前的显示的天气和现在要显示的天气是不一样的
+            if ((!weather.equals(preweather)) || weatherServices.isEmpty()) {
+                //停止当前的天气:
+                RemoveAllWeather();
+                LogUtil.d("ShowWeatherService", "进入内部判断");
+                //判断天气情况:
+                if (weather.equals("晴")) {
+                    showSun(HIGH_LEVEL);
+                } else if (weather.equals("多云")) {
+                    LogUtil.d("ShowWeatherService", "显示多云天气");
+                    showSun(LOW_LEVEL);
+                    showSmoke(MIDDLE_LEVEL);
+                } else if (weather.equals("阴")) {
+                    LogUtil.d("ShowWeatherService", "Start show Smoke");
+                    showSmoke(HIGH_LEVEL);
+                } else if (weather.equals("小雨")) {
+                    showRain(LOW_LEVEL);
+                } else if (weather.equals("中雨")) {
+                    showRain(MIDDLE_LEVEL);
+                } else if (weather.equals("暴雨")) {
+                    showRain(HIGH_LEVEL);
+                } else if (weather.equals("阵雨")) {
+                    showRain(HIGH_LEVEL);
+                } else if (weather.equals("雷阵雨")) {
+                    showRain(HIGH_LEVEL);
+                } else if (weather.equals("雷电")) {
+                } else if (weather.equals("冰雹")) {
+                } else if (weather.equals("轻雾")) {
+                    showSmoke(MIDDLE_LEVEL);
+                } else if (weather.equals("雾")) {
+                    showSmoke(HIGH_LEVEL);
+                } else if (weather.equals("浓雾")) {
+                    showSmoke(MAX_LEVEL);
+                } else if (weather.equals("霾")) {
+                    showSmoke(MAX_LEVEL);
+                } else if (weather.equals("雨夹雪")) {
+                    showSnow(LOW_LEVEL);
+                    showRain(MIDDLE_LEVEL);
+                } else if (weather.equals("小雪")) {
+                    showSnow(LOW_LEVEL);
+                } else if (weather.equals("中雪")) {
+                    showSnow(MIDDLE_LEVEL);
+                } else if (weather.equals("大雪")) {
+                    showSnow(HIGH_LEVEL);
+                } else if (weather.equals("暴雪")) {
+                    showSnow(MAX_LEVEL);
+                } else if (weather.equals("冻雨")) {
+                } else if (weather.equals("霜")) {
+                    showFrozen(MIDDLE_LEVEL);
+                } else if (weather.equals("霜冻")) {
+                    showFrozen(HIGH_LEVEL);
+                } else if (weather.equals("台风")) {
+                } else if (weather.equals("浮尘")) {
+                } else if (weather.equals("扬沙")) {
+                } else if (weather.equals("沙尘暴")) {
+                }//end if
+                preweather = weather;
             }//end if
-            preweather=weather;
-        }//end if
+        }//end else（是否显示天气）
     }
 
     @Override
@@ -244,8 +241,8 @@ public class ShowWeatherService extends Service {
                 PreferenceManager.getDefaultSharedPreferences(GlobalApplication.getContext());
         //此处以后需要添加判断是上午还是下午
         LogUtil.d("ShowWeatherService", "The time is:" + hour);
-        if (hour <= 17&&hour>=6) {
-            weather = sharedPreferences.getString("day_weather","");
+        if (hour <= 17 && hour >= 6) {
+            weather = sharedPreferences.getString("day_weather", "");
         } else {
             weather = sharedPreferences.getString("night_weather", "");
         }
@@ -267,4 +264,6 @@ public class ShowWeatherService extends Service {
         RemoveAllWeather();
         super.onDestroy();
     }
+
+
 }

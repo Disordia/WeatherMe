@@ -113,7 +113,7 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:text="重置选项"
+            android:text="重置"
             android:background="@drawable/btn_wm"
             android:textSize="@dimen/list_text_size"
             android:id="@+id/btn_show_reset"
